@@ -6,7 +6,7 @@ import time
 GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", "AIzaSyC9Mebz2gGOxxnPPgJD6kgzIzhTv-bQQbU")  # Get new key from https://aistudio.google.com/app/apikey
 
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('models/gemini-2.5-flash-preview-09-2025')
 
 class StudentProfile:
     def __init__(self, name, education, skills, experience, projects):
