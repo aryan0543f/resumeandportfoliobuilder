@@ -6,7 +6,14 @@ import time
 GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", "AIzaSyC9Mebz2gGOxxnPPgJD6kgzIzhTv-bQQbU")  # Get new key from https://aistudio.google.com/app/apikey
 
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel('gemini-1.5-flash')
+# Try multiple model names in case one works
+try:
+    model = genai.GenerativeModel('models/gemini-1.5-flash-latest')
+except:
+    try:
+        model = genai.GenerativeModel('models/gemini-pro')
+    except:
+        model = genai.GenerativeModel('gemini-pro')
 
 class StudentProfile:
     def __init__(self, name, education, skills, experience, projects):
@@ -250,10 +257,3 @@ with tab4:
             st.markdown("---")
             st.markdown("## Cover Letter")
             time.sleep(7)  # Wait before final API call
-            cover = generate_ai_cover_letter(profile, gemini_generate, job_description if job_description else None)
-            st.write(cover)
-
-st.sidebar.markdown("---")
-st.sidebar.success("🤖 Powered by Google Gemini AI")
-st.sidebar.warning("⚠️ Free tier: 5 requests/minute")
-st.sidebar.info("💡 Tip: Use individual tabs to avoid rate limits. Wait 1 minute between full document generations.")
