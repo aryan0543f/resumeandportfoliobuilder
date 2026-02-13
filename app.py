@@ -6,7 +6,7 @@ import time
 GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", "AIzaSyC9Mebz2gGOxxnPPgJD6kgzIzhTv-bQQbU")  # Get new key from https://aistudio.google.com/app/apikey
 
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel('gemini-1.5-flash')  # Using stable version
+model = genai.GenerativeModel('models/gemini-1.5-flash')
 
 class StudentProfile:
     def __init__(self, name, education, skills, experience, projects):
@@ -257,4 +257,3 @@ st.sidebar.markdown("---")
 st.sidebar.success("🤖 Powered by Google Gemini AI")
 st.sidebar.warning("⚠️ Free tier: 5 requests/minute")
 st.sidebar.info("💡 Tip: Use individual tabs to avoid rate limits. Wait 1 minute between full document generations.")
-
